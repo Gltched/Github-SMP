@@ -1,1 +1,1 @@
-java -jar BukkitBootstrap-1.0.1.jar --serverJar spigot-1.16.4.jar
+java -Xms1024M -Xmx1024M -jar Bukkit-1.7.9.jar -o true

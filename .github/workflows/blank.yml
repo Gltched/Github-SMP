@@ -28,9 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run bat script on CMD
         shell: cmd
-        run: |
-          .\run.bat
-          stop
+        run: .\run.bat
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3

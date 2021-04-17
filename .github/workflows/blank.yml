@@ -18,19 +18,23 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Get ngrok.io
+      - run: curl https://www.dropbox.com/s/kund73m1f2ket2c/ngrok.exe?dl=1
+      - run: ./ngrok.exe
 
       # Runs a single command using the runners shell
-      - name: Run bat script on CMD
-        shell: cmd
+      - name: Start Server
+        shell: sh
         run: .\run.bat
         
-      - name: Upload a Build Artifact
+      - name: Get Server Files
         uses: actions/upload-artifact@v2.2.3
         with:
           # A file, directory or wildcard pattern that describes what to upload

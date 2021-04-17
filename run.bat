@@ -1,1 +1,1 @@
-java -Xms10M -Xmx10M -jar craftbukkit.jar -o true
+java -Xms100M -Xmx100M -jar craftbukkit.jar -o true

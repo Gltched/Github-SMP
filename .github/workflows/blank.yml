@@ -44,7 +44,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - name: Start TCP Server
+
       - run: curl https://www.dropbox.com/s/ygtfqj9x5kxtqoy/ngrok?dl=1
       - run: ./ngrok tcp 25565

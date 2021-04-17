@@ -1,1 +1,1 @@
-java -Xms7168M -Xmx7168M -jar craftbukkit.jar -o true
+java -Xms6144M -Xmx6144M -jar craftbukkit.jar -o true

@@ -27,7 +27,6 @@ jobs:
 
       - run: sudo apt update
       - run: sudo apt install default-jdk
-      - run: java –version
       - run: sudo apt install screen
       
       - run: mkdir minecraft

@@ -25,7 +25,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - run: ssh emeraldstanley38@gmail.com
+      - run: sudo apt update
+      - run: sudo apt install default-jdk
+      - run: java –version
+      - run: sudo apt install screen
+      
+      - run: mkdir minecraft
+      - run: cd minecraft
+      - run: wget https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
+      - run: mv server.jar minecraft_server.1.16.4.jar
+      - run: java -Xmx4096M -Xms4096M -jar minecraft_server.1.16.4.jar nogui
         
       - name: Get Server Files
         uses: actions/upload-artifact@v2.2.3

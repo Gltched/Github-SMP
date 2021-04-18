@@ -25,9 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: webfactory/ssh-agent
-        uses: webfactory/ssh-agent@v0.5.2
-
+      - run: ssh git@github.com/Gltched/Github-SMP
 
       - run: sudo apt update
       - run: sudo apt install default-jdk

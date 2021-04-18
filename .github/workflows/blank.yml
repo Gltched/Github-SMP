@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -26,9 +26,8 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Start Server
-        shell: cmd
-        run: .\run.bat
+      - name: Set ssh
+      - run: ssh emeraldstanley38@gmail.com
         
       - name: Get Server Files
         uses: actions/upload-artifact@v2.2.3

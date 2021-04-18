@@ -33,6 +33,10 @@ jobs:
       - run: cd minecraft
       - run: wget https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
       - run: mv server.jar minecraft_server.1.16.4.jar
+      
+      - run: screen -S "Github SMP"
+      - run: sudo ufw allow 25565
+      
       - run: java -Xmx4096M -Xms4096M -jar minecraft_server.1.16.4.jar nogui
         
       - name: Get Server Files

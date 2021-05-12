@@ -25,21 +25,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - run: ssh default@170.177.253.17
-
-      - run: sudo apt update
-      - run: sudo apt install default-jdk
-      - run: sudo apt install screen
-      
-      - run: mkdir minecraft
-      - run: cd minecraft
-      - run: wget https://launcher.mojang.com/v1/objects/35139deedbd5182953cf1caa23835da59ca3d7cd/server.jar
-      - run: mv server.jar minecraft_server.1.16.4.jar
-      
-      - run: screen -S "Github SMP"
-      - run: sudo ufw allow 25565
-      
-      - run: java -Xmx4096M -Xms4096M -jar minecraft_server.1.16.4.jar nogui
+      - run: which git
+      - run: OUT1=$?
+      - run: |
+          if [ $OUT1 -eq 1 ];then
+            echo "We will attempt to install git in order to compile the server jar files. If this fails, you may need to run this script in SUDO"
+            apt-get install git
+          fi
         
       - name: Get Server Files
         uses: actions/upload-artifact@v2.2.3
@@ -47,14 +39,3 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path: ./
           # The desired behavior if no files are found using the provided path.
-  tcp-server:
-    # The type of runner that the job will run on
-    runs-on: macos-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - run: curl https://www.dropbox.com/s/ygtfqj9x5kxtqoy/ngrok?dl=1
-      - run: ./ngrok tcp 25565

@@ -32,7 +32,40 @@ jobs:
             echo "We will attempt to install git in order to compile the server jar files. If this fails, you may need to run this script in SUDO"
             apt-get install git
           fi
-        
+      
+      - run: which java
+      - run: OUT2=$?
+      - run: |
+          if [ $OUT2 -eq 1 ];then
+            echo "We will attempt to install java in order to compile the server jar files. If this fails, you may need to run this script in SUDO"
+            apt-get install openjdk-7-jre
+          fi
+      
+      - run: which tar
+      - run: OUT3=$?
+      - run: |
+          if [ $OUT3 -eq 1 ];then
+            echo "We will install the tar file command as it is needed to compile the server jar files. If this fails, you may need to run this script in SUDO"
+            apt-get install tar
+          fi
+      
+      - run: echo "Removing old buildtools (if any exist)"
+      - run: rm BuildTools.jar
+      
+      - run: echo "Removing old server jars and other stuff"
+      - run: find ! -name 'getServerUbuntu.sh' -type f -exec rm -f {} +
+      
+      - run: echo "Retrieving latest build tools"
+      - run: wget -O BuildTools.jar https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
+      
+      - run: echo "Unsetting git config option as required by buildtools"
+      - run: git config --global --unset core.autocrlf
+      
+      - run: echo "Compiling jars."
+      - run: java -jar BuildTools.jar
+      
+      - run: echo "Done compiling"
+      
       - name: Get Server Files
         uses: actions/upload-artifact@v2.2.3
         with:
